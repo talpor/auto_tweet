@@ -1,0 +1,4 @@
+#AuthUserFile "/home/lgdd/.htpasswds/public_html/autotweet/passwd"
+#AuthType Basic
+#AuthName "Auto Twitter LGDD"
+#require valid-user

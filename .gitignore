@@ -1,0 +1,9 @@
+credentials.py
+build
+*.pyc
+lgdd_autotweet.bk.py
+test.py
+logs
+tweets
+htpasswd
+*~

@@ -5,12 +5,16 @@ import time
 import datetime
 
 try:
-    from credentials import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
+    from credentials import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, \
+        ACCESS_TOKEN_SECRET
 except:
     raise ImportError("You need to import your tweet credentials")
 
+
 def get_api():
-    twitter = Api(consumer_key=CONSUMER_KEY, consumer_secret=CONSUMER_SECRET, access_token_key=ACCESS_TOKEN, access_token_secret=ACCESS_TOKEN_SECRET)
+    twitter = Api(consumer_key=CONSUMER_KEY, consumer_secret=CONSUMER_SECRET,
+                  access_token_key=ACCESS_TOKEN,
+                  access_token_secret=ACCESS_TOKEN_SECRET)
     return twitter
 
 

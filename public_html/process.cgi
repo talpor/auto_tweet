@@ -4,7 +4,16 @@ import os
 import cgi
 # import cgitb
 import datetime
+
+from email.mime.text import MIMEText
+import smtplib
+
 import subprocess
+
+try:
+    from ..credentials import TO_NOTIFY, FROM_NOTIFY
+except ImportError:
+    pass
 
 # cgitb.enable()
 print "Content-type: text/html\n"
@@ -54,4 +63,15 @@ for x in tweets:
     if x.strip():
         f.write(x.strip() + "\n")
 
-print "Todo bien"
+if TO_NOTIFY and FROM_NOTIFY:
+    msg = MIMEText("Tweets has been loaded successfully for day: %s" % inicio)
+    msg['Subject'] = "%s: Tweets loaded" % inicio
+    msg['From'] = FROM_NOTIFY
+    msg['To'] = ', '.join(TO_NOTIFY)
+    try:
+        s = smtplib.SMTP('localhost')
+        s.sendmail(FROM_NOTIFY, TO_NOTIFY, msg.as_string())
+    except Exeption, e:
+        print "Error Sending notification email"
+
+print "All Good"

@@ -2,23 +2,23 @@
 
 import os
 import cgi
-# import cgitb
-import datetime
 
+import datetime
 from email.mime.text import MIMEText
 import smtplib
 
 import subprocess
 
 try:
-    from ..credentials import TO_NOTIFY, FROM_NOTIFY
+    from notify_emails import TO_NOTIFY, FROM_NOTIFY
 except ImportError:
-    pass
+    TO_NOTIFY, FROM_NOTIFY = None, None
+
 
 # cgitb.enable()
 print "Content-type: text/html\n"
 
-outputdir = "/home/autotwitter/autotweet/tweets/"
+outputdir = os.path.abspath(__file__ + "/../../tweets/")
 
 def kill():
     print "Killing autotwitter <br/>"
@@ -71,7 +71,7 @@ if TO_NOTIFY and FROM_NOTIFY:
     try:
         s = smtplib.SMTP('localhost')
         s.sendmail(FROM_NOTIFY, TO_NOTIFY, msg.as_string())
-    except Exeption, e:
+    except:
         print "Error Sending notification email"
 
 print "All Good"

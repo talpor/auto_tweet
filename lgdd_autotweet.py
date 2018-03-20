@@ -22,21 +22,22 @@ def send_tweet(message):
     pattern = re.compile(r'(https?://[a-zA-Z0-9$-_@.&+!*\(\),]+(?:.png|.jpg|.jpeg|.PNG|.JPG|.JPEG))')
     image = pattern.findall(message)
     twitter = get_api()
+    length = 279
     if image:
         message = message.replace(image[0], "")
         message = message.strip()
         # When an image is attached, it allows messages up to 117 characters
-        if len(message) <= 117:
+        if len(message) <= length:
             twitter.PostMedia(message, image[0])
         else:
             return {"success": False, "reason": "Your message is longer than "
-                                                "117 characters with an image"}
+                                                "%s characters with an image" % (length)}
     else:
-        if len(message) <= 140:
+        if len(message) <= length:
             twitter.PostUpdate(message)
         else:
             return {"success": False, "reason": "Your message is longer than "
-                                                "140 characters"}
+                                                "%s characters" % (length)}
 
 
 def main():

@@ -35,12 +35,8 @@ $(document).ready(function(){
                 }
                 
             }
-            else if (re.test(lines[line]) && lines[line].replace(re, "").length > 116){
-                $('#listaerrores').append($('<li>' + "La linea " + (line+1)  + " contiene una imagen y tiene más de 116 caracteres" + "</li>"));
-                error = true;
-            }
-            else if (lines[line].length > 140 && !re.test(lines[line])){
-                $('#listaerrores').append($('<li>' + "La linea " + (line+1)  + " es de mas de 140 caracteres" + "</li>"));
+            else if (lines[line].length > 279){
+                $('#listaerrores').append($('<li>' + "La linea " + (line+1)  + " es de mas de 279 caracteres" + "</li>"));
                 error = true;
             }
         }
